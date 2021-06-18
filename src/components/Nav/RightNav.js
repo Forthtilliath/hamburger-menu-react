@@ -7,7 +7,11 @@ const Ul = styled.ul`
   flex-flow: row nowrap;
 
   li {
-    padding: 18px 10px;
+    padding: 20px;
+
+    &:hover {
+      background-color: #36668c;
+    }
   }
 
   @media (max-width: 768px) {
@@ -15,12 +19,13 @@ const Ul = styled.ul`
     background-color: #0d2538;
     position: fixed;
     transform: ${({ open }) => (open ? "translateX(0)" : "translateX(100%)")};
+    opacity: ${({ open }) => (open ? 1 : 0)};
     top: 0;
     right: 0;
     height: 100vh;
     width: 300px;
     padding-top: 3.5rem;
-    transition: transform 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     li {
       color: #fff;
@@ -28,14 +33,12 @@ const Ul = styled.ul`
   }
 `;
 
-const RightNav = ({ open }) => {
+const RightNav = ({ open, ulContent }) => {
   return (
     <Ul open={open}>
-      <li>Home</li>
-      <li>About Us</li>
-      <li>Contact Us</li>
-      <li>Sign In</li>
-      <li>Sign Up</li>
+      {ulContent.map((li, key) => (
+        <li key={key}>{li}</li>
+      ))}
     </Ul>
   );
 };

@@ -15,11 +15,11 @@ const Nav = styled.nav`
   }
 `;
 
-const Navbar = () => {
+const Navbar = ({ulContent}) => {
   return (
     <Nav>
       <div className="logo">Nav Bar</div>
-      <Burger />
+      <Burger ulContent={ulContent} />
     </Nav>
   );
 };
