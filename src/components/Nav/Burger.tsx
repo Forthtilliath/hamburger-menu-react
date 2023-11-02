@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import RightNav from "./RightNav";
 
-const StyledBurger = styled.div`
+const StyledBurger = styled(
+  ({ open, ...props }: StyledProps<"div", { open: boolean }>) => (
+    <div {...props} />
+  )
+)`
   width: 2rem;
   height: 2rem;
   position: fixed;
@@ -10,6 +14,7 @@ const StyledBurger = styled.div`
   right: 20px;
   z-index: 20;
   display: none;
+  cursor: pointer;
   @media (max-width: 768px) {
     display: flex;
     justify-content: space-around;
@@ -35,17 +40,22 @@ const StyledBurger = styled.div`
   }
 `;
 
-const Burger = ({ulContent}) => {
-  const [open, setOpen] = useState(false);
+type Props = {
+  ulContent: string[];
+};
 
+const Burger = ({ ulContent }: Props) => {
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen(!open);
+  
   return (
     <>
-      <StyledBurger open={open} onClick={() => setOpen(!open)}>
+      <StyledBurger open={open} onClick={toggleOpen}>
         <div />
         <div />
         <div />
       </StyledBurger>
-      <RightNav open={open} ulContent={ulContent} />
+      <RightNav open={open} ulContent={ulContent} setOpen={toggleOpen} />
     </>
   );
 };

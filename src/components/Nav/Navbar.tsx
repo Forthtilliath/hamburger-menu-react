@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Burger from "./Burger";
 
@@ -15,7 +14,11 @@ const Nav = styled.nav`
   }
 `;
 
-const Navbar = ({ulContent}) => {
+type Props = {
+  ulContent: string[];
+};
+
+const Navbar = ({ ulContent }: Props) => {
   return (
     <Nav>
       <div className="logo">Nav Bar</div>

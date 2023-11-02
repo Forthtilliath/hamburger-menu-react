@@ -1,7 +1,10 @@
-import React from "react";
 import styled from "styled-components";
 
-const Ul = styled.ul`
+const Ul = styled(
+  ({ open, ...props }: StyledProps<"ul", { open: boolean }>) => (
+    <ul {...props} />
+  )
+)`
   list-style: none;
   display: flex;
   flex-flow: row nowrap;
@@ -33,11 +36,19 @@ const Ul = styled.ul`
   }
 `;
 
-const RightNav = ({ open, ulContent }) => {
+type Props = {
+  open: boolean;
+  setOpen: () => void;
+  ulContent: string[];
+};
+
+const RightNav = ({ open, ulContent, setOpen }: Props) => {
   return (
     <Ul open={open}>
       {ulContent.map((li, key) => (
-        <li key={key}>{li}</li>
+        <li key={key} onClick={setOpen}>
+          {li}
+        </li>
       ))}
     </Ul>
   );
